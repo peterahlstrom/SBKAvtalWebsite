@@ -21,7 +21,7 @@
     </div>
     
     <div class="form-group row">
-        <asp:Label ID="Label1" runat="server" Text="Diarienummer" class="control-label col-sm-2 text-right"></asp:Label>
+        <asp:Label ID="Label1" runat="server" Text="Diarienummer" class="control-label required col-sm-2 text-right"></asp:Label>
         <div class="col-sm-6">
             
             <asp:TextBox ID="diarietb" runat="server" class="form-control" tag='input' ClientIDMode="Static"
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <asp:Label ID="Label2" runat="server" Text="Avtal börjar gälla" class="control-label col-sm-2 text-right"></asp:Label>
+        <asp:Label ID="Label2" runat="server" Text="Avtal börjar gälla" class="control-label required col-sm-2 text-right"></asp:Label>
         <div class="col-sm-6">
             
             <asp:TextBox ID="startdatetb" type="date" runat="server" class="form-control" onkeyup="tbchange()"></asp:TextBox>
@@ -49,7 +49,7 @@
 
 
     <div class="form-group row">
-        <asp:Label ID="Label3" runat="server" Text="Avtal upphör gälla" class="control-label col-sm-2 text-right"></asp:Label>
+        <asp:Label ID="Label3" runat="server" Text="Avtal upphör gälla" class="control-label required col-sm-2 text-right"></asp:Label>
         <div class="col-sm-6">
             <asp:TextBox ID="enddate" type="date" runat="server" class="form-control" onkeyup="tbchange()"></asp:TextBox>
 
