@@ -776,19 +776,19 @@ public partial class avtal_detail : System.Web.UI.Page
         ShowHideControls();
     }
 
-    protected void passwordvalidator_ServerValidate(object source, ServerValidateEventArgs args)
-    {
-        var correctpwd = ConfigurationManager.AppSettings["password"];
-        var typedpwd = passwordtb.Text;
-        if (correctpwd == typedpwd)
-        {
-            args.IsValid = true;
-        }
-        else
-        {
-            args.IsValid = false;
-            passwordvalidator.ErrorMessage = "Felaktigt lösenord";
-        }
+    //protected void passwordvalidator_ServerValidate(object source, ServerValidateEventArgs args)
+    //{
+    //    var correctpwd = ConfigurationManager.AppSettings["password"];
+    //    var typedpwd = passwordtb.Text;
+    //    if (correctpwd == typedpwd)
+    //    {
+    //        args.IsValid = true;
+    //    }
+    //    else
+    //    {
+    //        args.IsValid = false;
+    //        passwordvalidator.ErrorMessage = "Felaktigt lösenord";
+    //    }
         
-    }
+    //}
 }

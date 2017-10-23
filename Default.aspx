@@ -23,8 +23,12 @@
         <li>
             <a href="./leveranser.aspx">Leveranser</a>
         </li>
+        <li>
+            <a href="./login.aspx">Logga in</a>
+        </li>
         <%--<li>
             <a href="./avtalsgrid.aspx">Avtal som gridview</a>
         </li>--%>
     </ul>
+    <asp:Label ID="debug" runat="server" Text=""></asp:Label>
 </asp:Content>

@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <form class="form-horizontal" method="post" action="avtal_detail.aspx">
-    
+    <a style="margin-left:90%;" href="./login.aspx">Logga in</a>
      <div class="form-group row">
         <asp:Label ID="Label25" runat="server" Text="Typ av avtal" class="control-label col-sm-2 text-right"></asp:Label>
         <div class="col-sm-6">
@@ -271,7 +271,7 @@
     </div>
     </div>
 
-    <div class="form-group row">
+<%--    <div class="form-group row">
         <asp:Label ID="Label26" runat="server" Text="Lösenord" class="control-label col-sm-2 text-right"></asp:Label>
         <div class="col-sm-6">
             <asp:TextBox ID="passwordtb" runat="server" class="form-control" onkeyup="tbchange()" TextMode="Password"></asp:TextBox>
@@ -280,7 +280,7 @@
                 ForeColor="Red" onservervalidate="passwordvalidator_ServerValidate" 
                 SetFocusOnError="True" ValidateEmptyText="True"></asp:CustomValidator>
         </div>
-    </div>
+    </div>--%>
 
     <div class="form-group row">
         <div class="control-label col-sm-2 text-right">
