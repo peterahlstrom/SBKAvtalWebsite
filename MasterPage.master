@@ -7,19 +7,60 @@
     <title></title>
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
-    <link href="style/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="style/main.css" rel="stylesheet" type="text/css" />
+    <link href="style/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/masterPage.js"></script>
 </head>
-<body>
+<body onload="checkLogin();">
     <form id="form1" runat="server">
-    <div>
-        <h3><a href="Default.aspx" style="padding: 20px">SBK Avtalskatalog</a></h3>
-    </div>
 
-    <div>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="./Default.aspx">SBK Avtalskatalog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li><a href="./avtal.aspx">Alla avtal</a></li>
+                <li><a href="./leveranser.aspx">Leveranser</a></li>
+                <li id="editMenu" class="dropdown" runat="server">
+                  <a href="#" id="editMenuToggle" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" runat="server">Lägg till...<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="./avtal_detail.aspx?nytt_avtal=true">Lägg till nytt avtal</a></li>
+                    <li><a href="./person_detail.aspx?ny_person=true">Lägg till en person</a></li>
+                    <li><a href="./faktura_detail.aspx?ny_adress=true">Lägg till en fakturaadress</a></li>
+                  </ul>
+                </li>
+              </ul>
+<%--              <form class="navbar-form navbar-left">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>--%>
+              <ul class="nav navbar-nav navbar-right">
+                <li id="loginButton" runat="server"><a id="loginLabel" onServerClick="LoginButton_Click" runat="server">Logga in</a></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+
+        <asp:Label ID="debug" runat="server" Text=""></asp:Label>
         <asp:ContentPlaceHolder id="MainContent" runat="server">
         </asp:ContentPlaceHolder>
-    </div>
     </form>
 </body>
 </html>
