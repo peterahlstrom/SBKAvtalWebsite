@@ -1,3 +1,4 @@
 .vs/
 web.config
 *.sln
+js/bootstrap.js

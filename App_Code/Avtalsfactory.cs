@@ -85,6 +85,26 @@ public static class Avtalsfactory
                 ed = null;
             }
 
+            DateTime? rd;
+            if (reader.GetValue(26) != DBNull.Value)
+            {
+                rd = reader.GetDateTime(26);
+            }
+            else
+            {
+                rd = null;
+            }
+
+            int rdays;
+            if (reader.GetValue(27) != DBNull.Value)
+            {
+                rdays = reader.GetInt32(27);
+            }
+            else
+            {
+                rdays = 30;
+            }
+
             //string mptyp;
             //if (reader.GetString(5) != DBNull.Value)
             //{
@@ -182,6 +202,8 @@ public static class Avtalsfactory
                 diarienummer = diarienr,
                 startdate = sd,
                 enddate = ed,
+                reminddate = rd,
+                reminddays = rdays,
                 status = reader.GetString(4),
                 motpartstyp = reader.GetString(5),
                 sbkid = reader.GetInt32(6),

@@ -11,7 +11,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         string user = (Session["user"] != null) ? Session["user"].ToString() : "inte inloggad";
         Session["user"] = user;
-        debug.Text = Session["user"].ToString();
+        //debug.Text = Session["user"].ToString();
+        DateTime today = DateTime.Today;
+        //debug.Text = today.AddDays(16).ToShortDateString();
 
         SetEditMenu();
     }

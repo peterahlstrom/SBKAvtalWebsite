@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <form class="form-horizontal" method="post" action="avtal_detail.aspx">
-    <a style="margin-left:90%;" href="./login.aspx">Logga in</a>
+
      <div class="form-group row">
         <asp:Label ID="Label25" runat="server" Text="Typ av avtal" class="control-label col-sm-2 text-right"></asp:Label>
         <div class="col-sm-6">
@@ -60,11 +60,21 @@
                 Operator="DataTypeCheck" Type="Date" ControlToValidate="enddate" 
                 ForeColor="#FF3300"></asp:CompareValidator>
 
+            <br />
+
         </div>
     </div>
 
+    <div class="form-group row">
+
+        <asp:Label ID="Label26" runat="server" Text=""  class="control-label col-sm-2 text-right"></asp:Label>
+        <div class="col-sm-6">
+                Påminn <input id="reminddays" type="text" maxlength="3" size="2" value="30" style="text-align: center;" runat="server" />&nbsp; dagar innan</div>
+
+    </div>
 
     <div class="form-group row">
+
         <asp:Label ID="Label4" runat="server" Text="Status" class="control-label col-sm-2 text-right"></asp:Label>
         <div class="col-sm-6">
             <asp:DropDownList ID="statusdd" runat="server" onchange="tbchange()">

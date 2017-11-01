@@ -187,7 +187,7 @@ public partial class avtal_detail : System.Web.UI.Page
                 conn.Open();
 
                 // avtal
-                var sqlquery = "select id, diarienummer, startdate, enddate, status, motpartstyp, SBKavtalsid, scan_url, orgnummer, enligt_avtal, internt_alias, kommentar,  avtalstecknare, avtalskontakt, ansvarig_sbk, ansvarig_avd, ansvarig_enhet, upphandlat_av, datakontakt, konto, kstl, vht, mtp, aktivitet, objekt, avtalstyp from sbk_avtal.avtal where id = @p1;";
+                var sqlquery = "select id, diarienummer, startdate, enddate, status, motpartstyp, SBKavtalsid, scan_url, orgnummer, enligt_avtal, internt_alias, kommentar,  avtalstecknare, avtalskontakt, ansvarig_sbk, ansvarig_avd, ansvarig_enhet, upphandlat_av, datakontakt, konto, kstl, vht, mtp, aktivitet, objekt, avtalstyp, reminddate, reminddays from sbk_avtal.avtal where id = @p1;";
                 using (var cmd = new NpgsqlCommand(sqlquery, conn))
                 {
                     // cmd.Connection = conn;
@@ -239,6 +239,7 @@ public partial class avtal_detail : System.Web.UI.Page
         diarietb.Text = avtal.diarienummer;
         startdatetb.Text = string.Format("{0:d}", avtal.startdate);
         enddate.Text = string.Format("{0:d}", avtal.enddate);
+        reminddays.Value = avtal.reminddays.ToString();
 
         statusdd.Items.FindByValue(avtal.status).Selected = true;
         motpartsdd.Items.FindByValue(avtal.motpartstyp).Selected = true;
@@ -422,12 +423,14 @@ public partial class avtal_detail : System.Web.UI.Page
         using (var conn = new NpgsqlConnection(connstr))
         {
             conn.Open();
-            var query = "update sbk_avtal.avtal set(diarienummer, startdate, enddate, status, motpartstyp, sbkavtalsid, orgnummer, enligt_avtal, internt_alias, kommentar, ansvarig_avd, ansvarig_enhet, avtalstecknare, avtalskontakt, upphandlat_av, ansvarig_sbk, datakontakt, scan_url, konto, kstl, vht, mtp, aktivitet, objekt, avtalstyp) = (@diarienummer, @startdate, @enddate, @status, @motpartstyp, @sbkavtalsid, @orgnummer, @enligt_avtal, @internt_alias, @kommentar, @ansvarig_avd, @ansvarig_enhet, @avtalstecknare, @avtalskontakt, @upphandlat_av, @ansvarig_sbk, @datakontakt, @scan_url, @konto, @kstl, @vht, @mtp, @aktivitet, @objekt, @avtalstyp) where id = @id;";
+            var query = "update sbk_avtal.avtal set(diarienummer, startdate, enddate, status, motpartstyp, sbkavtalsid, orgnummer, enligt_avtal, internt_alias, kommentar, ansvarig_avd, ansvarig_enhet, avtalstecknare, avtalskontakt, upphandlat_av, ansvarig_sbk, datakontakt, scan_url, konto, kstl, vht, mtp, aktivitet, objekt, avtalstyp, reminddate, reminddays) = (@diarienummer, @startdate, @enddate, @status, @motpartstyp, @sbkavtalsid, @orgnummer, @enligt_avtal, @internt_alias, @kommentar, @ansvarig_avd, @ansvarig_enhet, @avtalstecknare, @avtalskontakt, @upphandlat_av, @ansvarig_sbk, @datakontakt, @scan_url, @konto, @kstl, @vht, @mtp, @aktivitet, @objekt, @avtalstyp, @reminddate, @reminddays) where id = @id;";
             using (var cmd = new NpgsqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("diarienummer", avtal.diarienummer);
                 cmd.Parameters.AddWithValue("startdate", avtal.startdate);
                 cmd.Parameters.AddWithValue("enddate", avtal.enddate);
+                cmd.Parameters.AddWithValue("reminddate", avtal.reminddate);
+                cmd.Parameters.AddWithValue("reminddays", avtal.reminddays);
                 cmd.Parameters.AddWithValue("status", avtal.status);
                 cmd.Parameters.AddWithValue("motpartstyp", avtal.motpartstyp);
                 cmd.Parameters.AddWithValue("sbkavtalsid", avtal.sbkid);
@@ -497,12 +500,14 @@ public partial class avtal_detail : System.Web.UI.Page
         using (var conn = new NpgsqlConnection(connstr))
         {
             conn.Open();
-            var query = "insert into sbk_avtal.avtal(diarienummer, startdate, enddate, status, motpartstyp, sbkavtalsid, orgnummer, enligt_avtal, internt_alias, kommentar, ansvarig_avd, ansvarig_enhet, avtalstecknare, avtalskontakt, upphandlat_av, ansvarig_sbk, datakontakt, scan_url, konto, kstl, vht, mtp, aktivitet, objekt, avtalstyp) values(@diarienummer, @startdate, @enddate, @status, @motpartstyp, @sbkavtalsid, @orgnummer, @enligt_avtal, @internt_alias, @kommentar, @ansvarig_avd, @ansvarig_enhet, @avtalstecknare, @avtalskontakt, @upphandlat_av, @ansvarig_sbk, @datakontakt, @scan_url, @konto, @kstl, @vht, @mtp, @aktivitet, @objekt, @avtalstyp) returning id;";
+            var query = "insert into sbk_avtal.avtal(diarienummer, startdate, enddate, status, motpartstyp, sbkavtalsid, orgnummer, enligt_avtal, internt_alias, kommentar, ansvarig_avd, ansvarig_enhet, avtalstecknare, avtalskontakt, upphandlat_av, ansvarig_sbk, datakontakt, scan_url, konto, kstl, vht, mtp, aktivitet, objekt, avtalstyp, reminddate, reminddays) values(@diarienummer, @startdate, @enddate, @status, @motpartstyp, @sbkavtalsid, @orgnummer, @enligt_avtal, @internt_alias, @kommentar, @ansvarig_avd, @ansvarig_enhet, @avtalstecknare, @avtalskontakt, @upphandlat_av, @ansvarig_sbk, @datakontakt, @scan_url, @konto, @kstl, @vht, @mtp, @aktivitet, @objekt, @avtalstyp, @reminddate, @reminddays) returning id;";
             using (var cmd = new NpgsqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("diarienummer", avtal.diarienummer);
                 cmd.Parameters.AddWithValue("startdate", avtal.startdate);
                 cmd.Parameters.AddWithValue("enddate", avtal.enddate);
+                cmd.Parameters.AddWithValue("reminddate", avtal.reminddate);
+                cmd.Parameters.AddWithValue("reminddays", avtal.reminddays);
                 cmd.Parameters.AddWithValue("status", avtal.status);
                 cmd.Parameters.AddWithValue("motpartstyp", avtal.motpartstyp);
                 cmd.Parameters.AddWithValue("sbkavtalsid", avtal.sbkid);
@@ -599,13 +604,24 @@ public partial class avtal_detail : System.Web.UI.Page
             ToList();
     }
 
+    private DateTime calculateReminderDate()
+    {
+        //hämtar enddate, drar ifrån valt antal dagar och returnerar DateTime-objekt.
+        int days = int.Parse(reminddays.Value);
+        return DateTime.Parse(enddate.Text).AddDays(days * -1);
+    }
+
     private Avtalsmodel GetFormInputs()
     {
+        
+
         Avtalsmodel avtal = new Avtalsmodel
         {
             diarienummer = diarietb.Text,
             startdate = DateTime.Parse(startdatetb.Text),
             enddate = DateTime.Parse(enddate.Text),
+            reminddate = calculateReminderDate(),
+            reminddays = int.Parse(reminddays.Value),
             status = statusdd.SelectedValue,
             motpartstyp = motpartsdd.SelectedValue,
             sbkid = sbkidtb.Text != "" ? int.Parse(sbkidtb.Text) : -1,

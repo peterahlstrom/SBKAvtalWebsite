@@ -12,6 +12,8 @@ public class Avtalsmodel
     public string diarienummer { get; set; }
     public DateTime? startdate { get; set; }
     public DateTime? enddate { get; set; }
+    public DateTime? reminddate { get; set; }
+    public int reminddays { get; set; }
     public string orgnummer { get; set; }
     public string enligtAvtal { get; set; }
     public string interntAlias { get; set; }
